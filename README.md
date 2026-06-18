@@ -215,13 +215,14 @@ http://localhost:8000
 
 | Módulo                   | Estado    |
 | ------------------------ | --------- |
-| Registro de Incidentes   | Completo  |
-| Gestión de Estados       | Completo  |
-| Control de Roles         | Completo  |
-| Persistencia de Datos    | Completo  |
-| Dashboard de Seguimiento | Completo  |
-| Notificaciones           | Pendiente |
-| Estadísticas y Reportes  | Pendiente |
+| **Autenticación de Usuarios (Session Auth)** | Completo |
+| **Control de Acceso Basado en Roles (Operador/Coordinador)** | Completo |
+| **Registro de Incidentes Críticos** | Completo |
+| **Persistencia de Datos en Base de Datos (MySQL)** | Completo |
+| **Cuaderno de Eventos (Dashboard de Seguimiento)** | Completo |
+| **Navegación Dinámica Interfaz (UPDS Online Style)** | Completo |
+| **Módulo de Notificaciones en Tiempo Real** | Pendiente |
+| **Generación de Reportes Estadísticos y Exportación PDF** | Pendiente |
 
 ---
 
