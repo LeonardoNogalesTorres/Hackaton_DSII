@@ -14,3 +14,7 @@ Route::get('/dashboard', [IncidenteController::class, 'index'])->name('dashboard
 
 // 4. Ruta rápida para cambiar el estado del incidente (Coordinador) [cite: 284, 285]
 Route::put('/incidentes/{id}/estado', [IncidenteController::class, 'updateEstado'])->name('incidentes.updateEstado');   
+
+Route::get('/login', [IncidenteController::class, 'showLogin'])->name('login');
+Route::post('/login', [IncidenteController::class, 'login']);
+Route::post('/logout', [IncidenteController::class, 'logout'])->name('logout');

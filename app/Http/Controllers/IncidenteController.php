@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Incidente;
+use Illuminate\Support\Facades\Auth;
 
 class IncidenteController extends Controller
 {
@@ -48,7 +49,7 @@ class IncidenteController extends Controller
     public function updateEstado(Request $request, $id)
     {
         $incidente = Incidente::findOrFail($id);
-        
+
         // Actualizamos el estado y el responsable asignado [cite: 284, 296, 297]
         $incidente->update([
             'estado' => $request->estado, // 'Pendiente', 'En proceso' o 'Resuelto' [cite: 285]
@@ -57,4 +58,43 @@ class IncidenteController extends Controller
 
         return redirect()->route('dashboard.index')->with('success', 'Incidente actualizado.');
     }
+    // Mostrar la pantalla de Login
+    public function showLogin()
+    {
+        return view('incidentes.login');
+    }
+
+    // Procesar el ingreso
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            // Redirección inteligente basada en el rol del usuario conectado
+            if (Auth::user()->rol === 'Coordinador') {
+                return redirect()->route('dashboard.index'); // Va al tablero general
+            }
+
+            return redirect()->route('incidentes.create'); // El operador va directo a reportar
+        }
+
+        return back()->withErrors([
+            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+        ]);
+    }
+
+    // Cerrar Sesión
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
+    }
+    
 }
