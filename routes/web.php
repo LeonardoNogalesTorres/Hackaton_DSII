@@ -18,3 +18,8 @@ Route::put('/incidentes/{id}/estado', [IncidenteController::class, 'updateEstado
 Route::get('/login', [IncidenteController::class, 'showLogin'])->name('login');
 Route::post('/login', [IncidenteController::class, 'login']);
 Route::post('/logout', [IncidenteController::class, 'logout'])->name('logout');
+// Ruta para el Formulario de Registro (Inicio para el Operador)
+Route::get('/incidentes/crear', [IncidenteController::class, 'create'])->name('incidentes.create');
+
+// Ruta para el Tablero (Seguimiento & Registro)
+Route::get('/dashboard', [IncidenteController::class, 'index'])->name('dashboard.index');
